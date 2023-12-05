@@ -47,7 +47,7 @@ def make_map(start, end, override=None):
      entries = [[int(y) for y in x.split()] for x in entries]
      def fn(v):
           for entry in entries:
-               if v in range(entry[1], entry[1]+entry[2]):
+               if entry[1]<=v<entry[1]+entry[2]:
                     return v-entry[1]+entry[0]
           return v
      return fn
@@ -74,9 +74,9 @@ p1 = min([get_location(int(y)) for y in seeds])
 print(p1)
 seed_ranges = [(int(seeds[i]),int(seeds[i+1])) for i in range(0,len(seeds),2)]
 new_seeds = (x for y in [range(v1,v1+v2) for v1,v2 in seed_ranges] for x in y)
-curr_min = p1
-for y in new_seeds:
+curr_min = math.inf
+for i, y in enumerate(new_seeds):
      lo = get_location(y)
      if lo<curr_min:
           curr_min=lo
-print(lo)
+print(curr_min)
