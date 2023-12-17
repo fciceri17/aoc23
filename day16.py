@@ -65,4 +65,13 @@ def get_en(starting_point):
      return len(visited)
 
 print(get_en((0,0,0,1)))
-print(max(get_en((x,y,dx,dy)) for x in range(rows) for y in range(cols) for dx,dy in [(-1,0), (1,0), (0,1), (0,-1)]))
+
+starting_points = []
+for x in range(rows):
+     starting_points.append((x, 0, 0, 1))
+     starting_points.append((x, cols-1, 0, -1))
+for y in range(cols):
+     starting_points.append((0, y, 1,0))
+     starting_points.append((rows-1, y, -1, 0))
+
+print(max((get_en((x,y,dx,dy)), x,y) for x,y,dx,dy in starting_points))
